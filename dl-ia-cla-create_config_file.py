@@ -49,10 +49,16 @@ config_object["DB_SER"] = {
 }
 
 
+config_object["paths"] = {
+    "data_path": "G:\data\connective-data\", 
+}
+
+
+
 
 
 
 
 #Write the above sections to config.ini file
-with open('config.ini', 'w') as conf:
+with open('..\\config.ini', 'w') as conf:
     config_object.write(conf)

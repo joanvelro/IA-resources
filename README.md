@@ -1,5 +1,9 @@
-# IA-resources
-* IA Resources
+# IA_resources
+
+    * Plotly functions to plot
+    * Communications settigns
+    * Pandas functions
+    * Time series functions
 
 * Use this repository as a submodule within the repository of the project in which it will be applied
 

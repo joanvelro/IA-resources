@@ -15,10 +15,10 @@ git submodule add https://github.com/joanvelro/IA-resources.git
 
 ```
 [submodule IA-resources]
-path = IA-rresources
+path = IA-resources
 url = https://github.com/joanvelro/IA-resources.git
 ```
 
-@joanvelro - 2021
+(C) Indra Digital Labs | AI - 2021
 
-joseangel.velasco@yahoo.es 
+@ Jose Angel Velasco (javelascor)

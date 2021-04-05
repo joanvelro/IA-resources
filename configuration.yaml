@@ -1,0 +1,8 @@
+global:
+    data_path:        '/Volumes/HDD/data/data_clarence'
+    project:          'CLARENCE'                                                                                
+    scope:            'EDA'
+    images_path:      '/Users/joseangelvelasco/GoogleDrive/pycharm_projects/indra/dl-ia-clarence/clarence/images'
+    logs_path:        '/Users/joseangelvelasco/GoogleDrive/pycharm_projects/indra/dl-ia-clarence/clarence'
+    results_path:     '/Users/joseangelvelasco/GoogleDrive/pycharm_projects/indra/dl-ia-clarence/clarence/results'
+    figures_data:     '/Users/joseangelvelasco/GoogleDrive/pycharm_projects/indra/dl-ia-clarence/clarence/figures'

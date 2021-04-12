@@ -2,8 +2,7 @@
 """
     This script defines some useful functions to use in data analysis and visualization
 
-    @ Jose Angel Velasco (javelascor@indra.es)
-    (C) Indra Digital Labs | IA - 2021
+    @ Jose Angel Velasco (joseangel.velasco@yahoo.es)
 
 """
 

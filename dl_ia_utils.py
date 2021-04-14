@@ -1,17 +1,31 @@
-#!/usr/bin/env/ python
+#!/usr/bin/env/python
+# -*- coding: utf-8 -*-
 """
     This script defines some useful functions to use in data analysis and visualization
-
     @ Jose Angel Velasco (joseangel.velasco@yahoo.es)
-
 """
 
 
+def dl_ia_utils_set_up_logger(path):
+    """ Set up logger
+    :arg path: path where to store logs example: 'logs\\dl-ia-cla-predictive'
 
-
-#############################################################
-#--------- CONFIGURATION AND INFO --------------------------#
-#############################################################
+    """
+    import logging
+    logger = logging.getLogger(path)
+    logger.setLevel(logging.DEBUG)
+    fh = logging.FileHandler('{}.log'.format(path))
+    fh.setLevel(logging.DEBUG)
+    logger.addHandler(fh)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+    logging.getLogger().addHandler(logging.StreamHandler())  # to display in console message
+    # logger.debug('mensaje debug')
+    # logger.info('mensaje info')
+    # logger.warning('mensaje warning')
+    # logger.error('mensaje error')
+    # logger.critical('mensaje critical')
 
 
 def dl_ia_utils_systems_info():
@@ -50,9 +64,6 @@ def dl_ia_utils_config_matplotlib():
     rc('text', usetex=True)
 
 
-
-
-
 def dl_ia_utils_config_pandas():
     """
     Allows to show all the columns of a dataframe in the console
@@ -64,7 +75,6 @@ def dl_ia_utils_config_pandas():
     desired_width = 350
     np.set_printoptions(linewidth=desired_width)  # show dataframes in console
     pd.set_option('display.max_columns', 10)
-
 
 
 def dl_ia_utils_check_folder(path_folder):
@@ -84,26 +94,8 @@ def dl_ia_utils_check_folder(path_folder):
         return error
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #############################################################
-#----------  DATA ANALYSIS ---------------------------------#
+# ----------  DATA ANALYSIS ---------------------------------#
 #############################################################
 
 
@@ -114,11 +106,11 @@ def dl_ia_utils_memory_usage(df):
     :return:
     """
 
-    error=0
+    error = 0
 
     try:
-        print('{} Data Frame Memory usage: {:2.2f} GB'.format('-'*20, df.memory_usage(deep=True).sum() / 1000000000))
-        print('{} Data Frame Shape: {} '.format('-'*20, df.shape))
+        print('{} Data Frame Memory usage: {:2.2f} GB'.format('-' * 20, df.memory_usage(deep=True).sum() / 1000000000))
+        print('{} Data Frame Shape: {} '.format('-' * 20, df.shape))
     except Exception as exception_msg:
         error = 1
         print('(!) Error in dl_ia_utils_memory_usage: ' + str(exception_msg))
@@ -137,7 +129,6 @@ def dl_ia_utils_filter_by_std(df, variable, option):
     return df_aux
 
 
-
 def dl_ia_utils_subs_zeros_values(y):
     """ subs zero values from from an array by values close to zeros 1e-10
         e.g.: y = np.array([1,4,2,3,7,8,0,0,8,7,0,0,9,8])
@@ -149,9 +140,6 @@ def dl_ia_utils_subs_zeros_values(y):
     df = pd.DataFrame({'y': y})
     df.loc[df['y'] == 0, ['y']] = 1e-9
     return df['y'].values
-
-
-
 
 
 def dl_ia_utils_create_datestring(row):
@@ -191,10 +179,6 @@ def dl_ia_utils_create_date(row):
         print('(!) Error in dl_ia_utils_create_date: ' + str(exception_msg))
 
 
-
-
-
-
 def dl_ia_utils_create_time(row):
     """ convert values of HOUR and MINUTE to datetime
     :param row: lambda variable regarding columns of the dataframe
@@ -205,7 +189,6 @@ def dl_ia_utils_create_time(row):
         return datetime.time(int(row['HOUR']), int(row['MINUTE']), int(row['SECOND']))
     except Exception as exception_msg:
         print('(!) Error in dl_ia_utils_create_time: ' + str(exception_msg))
-
 
 
 def dl_ia_utils_create_timestamp(row):
@@ -220,8 +203,6 @@ def dl_ia_utils_create_timestamp(row):
         print('(!) Error in dl_ia_utils_create_timestamp: ' + str(exception_msg))
 
 
-
-
 def dl_ia_utils_create_datetime(row):
     """ create datetime with hour and minute
     :param row: lambda variable regarding columns of the dataframe
@@ -232,11 +213,6 @@ def dl_ia_utils_create_datetime(row):
         return datetime.time(int(row['HOUR']), int(row['MINUTE']))
     except Exception as exception_msg:
         print('(!) Error in dl_ia_conn_utils_create_datetime: ' + str(exception_msg))
-
-
-
-
-
 
 
 def dl_ia_utils_read_csv_per_chunks(path):
@@ -264,7 +240,6 @@ def dl_ia_utils_read_csv_per_chunks(path):
         error = 1
         df = []
         return error, df
-
 
 
 def dl_ia_utils_vertical_translation(y):
@@ -335,7 +310,6 @@ def dl_ia_utils_quarter_groups(x):
     return y
 
 
-
 def dl_ia_utils_check_null_values(df):
     """
 
@@ -359,12 +333,6 @@ def dl_ia_utils_check_null_values(df):
         return df
 
 
-
-
-
-
-
-
 def dl_ia_utils_comm(msg):
     """ Funtion to show mesages in terminal
 
@@ -372,7 +340,6 @@ def dl_ia_utils_comm(msg):
     :return:
     """
     print('{} {}'.format('-' * 20, msg))
-
 
 
 def dl_ia_utils_quarter_classify(x):
@@ -391,12 +358,6 @@ def dl_ia_utils_quarter_classify(x):
     if x > 45:
         y = 45
     return y
-
-
-
-
-
-
 
 
 #############################################################
@@ -433,18 +394,8 @@ def dl_ia_utils_check_descriptive_statistics(df):
         return error
 
 
-
-
-
-
-
-
-
-
-
-
 #############################################################
-#------------------  PLOTS ---------------------------------#
+# ------------------  PLOTS ---------------------------------#
 #############################################################
 
 def dl_ia_utils_plot_timeseries(df, var_x, var_y):
@@ -457,7 +408,6 @@ def dl_ia_utils_plot_timeseries(df, var_x, var_y):
     """
 
     import plotly.graph_objects as go
-
 
     show = True
     print_ = True
@@ -481,8 +431,6 @@ def dl_ia_utils_plot_timeseries(df, var_x, var_y):
         fig.write_html("figures\\timeseries_{}.html".format(var_y))
 
 
-
-
 def dl_ia_utils_plot_line(df, var_x, var_y, var_group):
     """
 
@@ -493,7 +441,6 @@ def dl_ia_utils_plot_line(df, var_x, var_y, var_group):
     :return:
     """
     import plotly.express as px
-
 
     show = True
     print_ = True
@@ -508,8 +455,6 @@ def dl_ia_utils_plot_line(df, var_x, var_y, var_group):
         fig.show()
     if print_:
         fig.write_html("figures\\line_plot_simple_{}_{}.html".format(var_x, var_y))
-
-
 
 
 def dl_ia_utils_plot_marginal_dist_plot(df, var_x, var_y):
@@ -549,7 +494,6 @@ def dl_ia_utils_plot_scatter_with_facets(df, var_x, var_y, var_color, var_group)
     :return:
     """
     import plotly.express as px
-
 
     show = True
     print_ = True
@@ -649,7 +593,6 @@ def dl_ia_utils_plot_multi_timeseries_with_slider():
     fig.show()
 
 
-
 def dl_ia_utils_plot_histogram(df, variable, n_bins_, label):
     """ plot a histogram using plotly from a vairable in a dataframe
 
@@ -663,7 +606,6 @@ def dl_ia_utils_plot_histogram(df, variable, n_bins_, label):
     import plotly.express as px
 
     import numpy as np
-
 
     print_ = True
     show = True
@@ -707,7 +649,6 @@ def dl_ia_utils_time_series_plot(time_index, y1, label1, title):
     """
 
     import plotly.graph_objects as go
-
 
     print_ = True
     show = True
@@ -769,7 +710,6 @@ def dl_ia_utils_time_series_comparison(time_index, y1, y2, label1, label2, title
     """
 
     import plotly.graph_objects as go
-
 
     print_ = True
     show = True
@@ -844,7 +784,6 @@ def dl_ia_utils_plot_scatterplot_simple(df, var_x, var_y, label, title_):
     """
     import plotly.express as px
 
-
     print_ = True
     show = True
     error = 0
@@ -885,7 +824,6 @@ def dl_ia_utils_plot_scatterplot(df, var_x, var_y, var_color, var_size, label):
     :return:
     """
     import plotly.express as px
-
 
     print_ = True
     show = True
@@ -936,7 +874,6 @@ def dl_ia_utils_plot_three_timeseries(df, var_x, var_y1, var_y2, var_y3,
     import plotly.graph_objects as go
     import plotly.io as pio
     import plotly.express as px
-
 
     # by default in showed in browser, change to 'notebook' if you want
     pio.renderers.default = "browser"
@@ -1333,7 +1270,6 @@ def dl_ia_utils_plot_timeseries_with_slider(df, var_x, var_y, title):
 
     import plotly.graph_objects as go
 
-
     show = True
     print_ = True
 
@@ -1392,7 +1328,6 @@ def dl_ia_utils_plot_timeseries(df, var_x, var_y, title_):
 
     import plotly.graph_objects as go
 
-
     show = True
     print_ = True
 
@@ -1422,7 +1357,6 @@ def dl_ia_utils_plot_timeseries(df, var_x, var_y, title_):
         return error
 
 
-
 def dl_ia_utils_plot_two_timeseries(df, var_x, var_y1, var_y2, title_, x_label, y_label):
     """
 
@@ -1433,7 +1367,6 @@ def dl_ia_utils_plot_two_timeseries(df, var_x, var_y1, var_y2, title_, x_label, 
     :return:
     """
     import plotly.graph_objects as go
-
 
     x_label = 'TIME (15 min)'
     y_label = 'FLOW (veh./h)'
@@ -1505,7 +1438,6 @@ def dl_ia_utils_plot_line(df, var_x, var_y, var_group, title_):
     """
     import plotly.express as px
 
-
     show = True
     print_ = True
 
@@ -1539,7 +1471,6 @@ def dl_ia_utils_plot_scatterplot_simple(df, var_x, var_y, label):
     :return:
     """
     import plotly.express as px
-
 
     print_ = True
     show = True
@@ -1583,7 +1514,6 @@ def dl_ia_utils_plot_scatterplot(df, var_x, var_y, var_color, var_size, label):
     """
     import plotly.express as px
 
-
     print_ = True
     show = True
     error = 0
@@ -1616,12 +1546,8 @@ def dl_ia_utils_plot_scatterplot(df, var_x, var_y, var_color, var_size, label):
         return error
 
 
-
-
-
-
 #############################################################
-#--------------- DATA BASE ---------------------------------#
+# --------------- DATA BASE ---------------------------------#
 #############################################################
 
 def dl_ia_query_get_data(query, ddbb_settings):
@@ -1660,11 +1586,14 @@ def dl_ia_query_get_data(query, ddbb_settings):
 
     if error == 0:
         try:
-            print('Loading data from server:[{}] database:[{}] schema:[{}] port : [{}] '.format(server, database, schema, port))
+            print(
+                'Loading data from server:[{}] database:[{}] schema:[{}] port : [{}] '.format(server, database, schema,
+                                                                                              port))
             ### connect do DDBB and get last 6 hours od data
             # sql_conn = pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + user + ';PWD=' + password + 'Trusted_Connection=yes')
             # sql_conn = pyodbc.connect('DRIVER={SQL Server Native Client RDA 11.0};SERVER=' + server + ';DATABASE=' + database + ';UID=' + user + ';PWD=' + password + 'Trusted_Connection=yes')
-            sql_conn_str = 'DRIVER={};SERVER={},{};DATABASE={};UID={};PWD={}'.format(driver, server, port, database, user, password)
+            sql_conn_str = 'DRIVER={};SERVER={},{};DATABASE={};UID={};PWD={}'.format(driver, server, port, database,
+                                                                                     user, password)
             # print(sql_conn_str)
             # sql_conn = pyodbc.connect('DRIVER=' + driver +';SERVER=' + server + ',' + port + ';DATABASE=' + database + ';UID=' + user + ';PWD=' + password)
             sql_conn = pyodbc.connect(sql_conn_str)
@@ -1699,7 +1628,6 @@ def dl_ia_utils_initialize_engine(ddbb_settings):
         print('(!) Error in dl_ia_conn_initialize_engine: {}'.format(exception_msg))
         engine = []
         return engine
-
 
 
 def dl_ia_utils_query_get_data(query, ddbb_settings):
@@ -1738,11 +1666,14 @@ def dl_ia_utils_query_get_data(query, ddbb_settings):
 
     if error == 0:
         try:
-            print('Loading data from server:[{}] database:[{}] schema:[{}] port : [{}] '.format(server, database, schema, port))
+            print(
+                'Loading data from server:[{}] database:[{}] schema:[{}] port : [{}] '.format(server, database, schema,
+                                                                                              port))
             ### connect do DDBB and get last 6 hours od data
             # sql_conn = pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + user + ';PWD=' + password + 'Trusted_Connection=yes')
             # sql_conn = pyodbc.connect('DRIVER={SQL Server Native Client RDA 11.0};SERVER=' + server + ';DATABASE=' + database + ';UID=' + user + ';PWD=' + password + 'Trusted_Connection=yes')
-            sql_conn_str = 'DRIVER={};SERVER={},{};DATABASE={};UID={};PWD={}'.format(driver, server, port, database, user, password)
+            sql_conn_str = 'DRIVER={};SERVER={},{};DATABASE={};UID={};PWD={}'.format(driver, server, port, database,
+                                                                                     user, password)
             # print(sql_conn_str)
             # sql_conn = pyodbc.connect('DRIVER=' + driver +';SERVER=' + server + ',' + port + ';DATABASE=' + database + ';UID=' + user + ';PWD=' + password)
             sql_conn = pyodbc.connect(sql_conn_str)
@@ -1757,12 +1688,8 @@ def dl_ia_utils_query_get_data(query, ddbb_settings):
             return error, df_input
 
 
-
-
-
-
 #############################################################
-#-------  MACHINE LEARNING ---------------------------------#
+# -------  MACHINE LEARNING ---------------------------------#
 #############################################################
 
 def dl_ia_utils_create_lagged_variables(df, variable, number_lags):
@@ -1782,9 +1709,6 @@ def dl_ia_utils_create_lagged_variables(df, variable, number_lags):
     return df
 
 
-
-
-
 def dl_ia_utils_anomaly_detection_univariate(df, variable):
     """ Produce anomaly detection with forest isolation with univariate data
     :param df:
@@ -1795,7 +1719,6 @@ def dl_ia_utils_anomaly_detection_univariate(df, variable):
     from sklearn.ensemble import IsolationForest
     import numpy as np
     import pandas as pd
-
 
     error = 0
 
@@ -1844,11 +1767,6 @@ def dl_ia_utils_anomaly_detection_univariate(df, variable):
         return error
 
 
-
-
-
-
-
 def dl_ia_utils_variability_captured(y, y_hat):
     """ function to calculate the varibility captured or explained variance
 
@@ -1890,16 +1808,14 @@ def dl_ia_utils_regression_evaluation(y_hat, y):
     from IA_resources.dl_ia_utils import dl_ia_utils_mape
     from sklearn.metrics import r2_score, mean_absolute_error, explained_variance_score, mean_squared_error
 
-
-    R2 = round(r2_score(y_hat, y),3)
-    MAE = round(mean_absolute_error(y_hat, y),3)
-    MSE = round(mean_squared_error(y_hat, y),3)
-    EV = round(explained_variance_score(y_hat, y),3)
+    R2 = round(r2_score(y_hat, y), 3)
+    MAE = round(mean_absolute_error(y_hat, y), 3)
+    MSE = round(mean_squared_error(y_hat, y), 3)
+    EV = round(explained_variance_score(y_hat, y), 3)
     VC = round(dl_ia_utils_variability_captured(y_hat, y), 3)
 
-
     errors = abs(y_hat - y)
-    #MAPE = 100 * np.mean(errors / y)
+    # MAPE = 100 * np.mean(errors / y)
     MAPE = dl_ia_utils_mape(y_hat, y)
     accuracy = 100 - MAPE
 
@@ -1913,9 +1829,3 @@ def dl_ia_utils_regression_evaluation(y_hat, y):
     print('Accuracy = {:0.2f} %.'.format(accuracy))
 
     return R2, MAE, MSE, EV, VC
-
-
-
-
-
-

@@ -8,7 +8,7 @@
 
 def dl_ia_utils_set_up_logger(path):
     """ Set up logger
-    :arg path: path where to store logs example: 'logs\\dl-ia-cla-predictive'
+    :arg path: path where to store reports example: 'reports\\dl-ia-cla-predictive'
 
     """
     import logging

@@ -6,6 +6,18 @@
 """
 
 
+
+def dl_ia_utils_change_directory(path):
+    """
+    path ='path/to/app/'
+    """
+    import os
+    new_path = os.path.dirname(os.path.dirname(__file__))
+    new_path = os.chdir(path)
+
+    import sys
+    sys.path.insert(1, path)
+    
 def dl_ia_utils_set_up_logger(path):
     """ Set up logger
     :arg path: path where to store logs example: 'logs\\dl-ia-cla-predictive'

@@ -38,32 +38,32 @@ You can install the packages globally, but I suggest installing them in a 'virtu
 First you'll need to install a Python package manager called 'pip' thus:
 
 ```
-    easy_install pip
+easy_install pip
 ``` 
 (If you get a permissions error, try adding a 'sudo' to the beginning, so 'sudo easy_install pip')
 ```
-    sudo easy_install pip
+sudo easy_install pip
 ``` 
 Now install virtualenv thus:
 ```
-    pip install virtualenv
+pip install virtualenv
 ```
 Navigate to your home directory 'cd ~' and create a virtual environment. We'll call it 'my_virtual_env'
 ```
-   virtualenv my_virtual_env
+virtualenv my_virtual_env
 ```
     
 Now, to switch your shell environment to be within the env:
 ```
-    source my_virtual_env/bin/activate
- ```  
+source my_virtual_env/bin/activate
+```  
  
- ```
-   my_virtual_env/Scripts/activate
- ```
+```
+my_virtual_env/Scripts/activate
+```
 Great: now you can install the other prerequisites into this environment.
 ```
-    pip install numpy jupyter keras matplotlib tensorflow xgboost pyomo
+pip install numpy jupyter keras matplotlib tensorflow xgboost pyomo statsmodels
 ```
 
 Export environmnet
@@ -80,7 +80,7 @@ pip install -r requirements.txt
 
 Now that everything's installed, you can open one of these web-based Python environments with the following command:
 ```
-    jupyter notebook
+jupyter notebook
 ```
 Create a new Python notebook from the "New" menu at the top-right:
 
